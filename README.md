@@ -1,66 +1,57 @@
 <div align="center">
 
-# ⚡ BOUNZO: Real-Time Authoritative Multiplayer Arcade
+# ⚡ BOUNZO: Real-Time Multiplayer & Mobile Arcade Engine
 
-**A production-ready, high-performance vertical survival platformer featuring authoritative UDP multiplayer, deterministic procedural world generation, and enterprise-grade resilience.**
+### Production Android Game & Authoritative UDP Multiplayer Architecture
+**Engineered with Godot Engine 4 (GDScript 2.0) • Published on Google Play • Built for 60 FPS Mobile Performance**
 
-[![Engine](https://img.shields.io/badge/Engine-Godot%204.7%2B-blue.svg?logo=godotengine&logoColor=white)](https://godotengine.org/)
-[![Language](https://img.shields.io/badge/Language-GDScript%202.0%20(OOP)-478CBF.svg)](https://docs.godotengine.org/)
-[![Networking](https://img.shields.io/badge/Networking-Authoritative%20UDP%20%2F%20RPC-orange.svg)](https://en.wikipedia.org/wiki/User_Datagram_Protocol)
-[![Deployment](https://img.shields.io/badge/Deployment-Docker%20%7C%20Fly.io%20Edge-24185b.svg?logo=docker&logoColor=white)](https://fly.io)
-[![Tests](https://img.shields.io/badge/Test%20Suite-20%2F20%20Passed%20(100%25)-brightgreen.svg)](test_multiplayer.gd)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Desktop%20Cross--Platform-green.svg)](export_presets.cfg)
-[![License](https://img.shields.io/badge/License-Proprietary%20Evaluation%20Only-red.svg)](LICENSE)
+[![Google Play Store](https://img.shields.io/badge/Google_Play-Live_on_Play_Store-414141?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=com.ayzus.bounzo)
+[![Engine](https://img.shields.io/badge/Engine-Godot%204.7%2B-blue.svg?style=for-the-badge&logo=godotengine&logoColor=white)](https://godotengine.org/)
+[![Networking](https://img.shields.io/badge/Networking-Authoritative%20UDP%20%2F%20RPC-orange.svg?style=for-the-badge)](https://en.wikipedia.org/wiki/User_Datagram_Protocol)
+[![Deployment](https://img.shields.io/badge/Cloud-Docker%20%7C%20Fly.io%20Edge-24185b.svg?style=for-the-badge&logo=docker&logoColor=white)](https://fly.io)
+[![Test Suite](https://img.shields.io/badge/Automated%20Tests-20%2F20%20Passed%20(100%25)-brightgreen.svg?style=for-the-badge)](test_multiplayer.gd)
+[![License](https://img.shields.io/badge/License-Proprietary%20Evaluation%20Only-red.svg?style=for-the-badge)](LICENSE)
 
----
+<br/>
+
+<a href="https://play.google.com/store/apps/details?id=com.ayzus.bounzo">
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="75">
+</a>
+
+<p align="center">
+  <b>Package Name:</b> <code>com.ayzus.bounzo</code> &nbsp;|&nbsp; 
+  <b>Version:</b> <code>2.1.0</code> &nbsp;|&nbsp; 
+  <b>Target Platforms:</b> Android (ARM64 / ARMv7) & Cross-Platform PC
+</p>
 
 </div>
 
-## 📌 Executive Overview
+---
 
-**BOUNZO** is a fast-paced vertical arcade survival platformer developed for mobile and desktop platforms. Designed with software engineering best practices, this repository showcases a full end-to-end game system: from custom physics, modular state machines, and cyber-neon responsive UI, to a **custom authoritative client-server multiplayer stack** capable of orchestrating 4-player real-time matches across the globe with zero server lag, anti-cheat validation, and deterministic procedural synchronization.
+## 🎯 Executive Summary for Technical Recruiters & Engineering Leads
 
-> **Note for Technical Recruiters & Hiring Managers:**  
-> This repository was architected to demonstrate core engineering capabilities across distributed systems, real-time networking, deterministic simulation, memory optimization, automated testing, and cloud infrastructure deployment.
+**BOUNZO** is an end-to-end, production-ready arcade survival platformer with a distributed authoritative multiplayer architecture. Originally developed and published to Google Play as a high-performance single-player arcade title, it has been scaled into a **real-time 4-player competitive survival racer** powered by a dedicated UDP server, deterministic seed synchronization, and zero-allocation gameplay loops.
+
+### Key Engineering Domains Demonstrated:
+1. **Real-Time Distributed Systems**: Authoritative dedicated server model, client-side dead reckoning, UDP RPC synchronization at 20 Hz, and strict packet rate limiting (35 pps).
+2. **Deterministic Procedural Generation**: Seed-based arena generation ($O(1)$ network overhead) ensuring 100% bitwise-identical obstacles across 4 connected peers.
+3. **Rigorous Quality Engineering**: 20/20 headless integration test suite executed on CI/CD CLI with zero regressions.
+4. **Mobile Performance Engineering**: Locked 60 FPS on low-to-high-end Android devices, runtime PCM waveform procedural audio synthesis, and custom GL Compatibility rendering pipeline.
+5. **Cloud DevOps & Edge Containerization**: Containerized headless Linux microVM deployment via Docker and Fly.io global UDP edge routing.
+6. **Data Integrity & Monetization**: Version 5 JSON atomic save schema, tamper-proof economy, and safe asynchronous Google AdMob state machine.
 
 ---
 
-## 🏗️ Core Engineering Highlights & Architecture
+## 🏗️ Deep-Dive Architecture & Engineering Achievements
 
 ### 1. Authoritative Client-Server Real-Time Networking
-- **Decoupled Architecture**: Standalone headless dedicated server mode (`res://scenes/multiplayer/server_main.tscn`) separated from client logic, allowing seamless deployment to Linux containers while keeping client bundles lean.
-- **Low-Latency UDP Packet Pipeline**: State synchronization operating at a tuned 20 Hz tick rate with unreliable-ordered channels for player transforms and reliable channels for critical RPC events (game state, room transitions, results).
-- **Anti-Cheat & Rate Limiting**: Built-in packet throttling (strict limit of 35 packets/sec per peer), malicious payload sanitization, coordinate boundary enforcement, and authoritative room state transitions to prevent client tampering.
-- **Smooth Remote Interpolation**: Remote player avatars (`remote_player.gd`) implement cubic interpolation with velocity extrapolation and dead reckoning, eliminating jitter under variable packet latency and jitter.
-
-### 2. Deterministic Seed-Based Procedural Generation
-- **Zero-Bandwidth Level Sync**: Instead of streaming hundreds of platform transform coordinates across the wire, the server broadcasts an authoritative 64-bit integer seed upon match start.
-- **Identical Obstacle Courses**: Clients instantiate identical seeded pseudo-random number generators (`multiplayer_platform_generator.gd`), yielding 100% bitwise-identical layouts of moving, spring, and fragile platforms across all 4 racers with $O(1)$ network overhead.
-
-### 3. Room Registry & Dynamic Fault-Tolerant Lifecycle
-- **Collision-Checked Room Codes**: Human-readable 5-character alphanumeric room codes generated with automated collision detection and ambiguous character filtering (excluding `0`, `O`, `1`, `I`).
-- **Slot Allocation & Host Migration**: Dynamic 4-slot room allocation (Cyan, Magenta, Yellow, Green). If the room creator disconnects, authority migrates seamlessly to the next connected peer without aborting the match.
-- **Graceful Lifecycle & Resource Reclamation**: Automatic timeout detection, socket cleanup, and empty room garbage collection prevent memory leaks and zombie sessions.
-
-### 4. Enterprise-Grade Monetization & Security Engine
-- **Robust Ad Lifecycle Handling**: Asynchronous `AdManager` with a verified callback state machine. Prevents unearned rewards by asserting strict ad completion verification signals.
-- **Single-Player State Protection**: Save system (v5 schema) strictly isolated from transient multiplayer match outcomes, preventing save corruption or unauthorized currency injection.
-
-### 5. Automated CI/CD Headless Integration Test Suite
-- Comprehensive automated headless test suite (`test_multiplayer.gd`) executing 20 rigorous test scenarios directly on the Godot engine CLI, ensuring zero regressions:
-  - Single-player startup & scene validation
-  - Save schema backward compatibility
-  - Economy, cosmetics, and rank star verification
-  - AdMob reward gate protection
-  - 2-player and 4-player room join / capacity enforcement
-  - 5th player rejection handling
-  - Synchronized countdown & deterministic sorting
-  - Concurrent peer disconnects & host migration
-  - Anti-spam & rate-limiting validation
-
----
-
-## 📊 Network Architecture & Handshake Flow
+- **Decoupled Dedicated Server**: Fully standalone headless server scene (`res://scenes/multiplayer/server_main.tscn`) driven by `dedicated_server.gd`, `match_manager.gd`, and `room_manager.gd`. The server can run headlessly inside any minimal Linux container with no graphical dependencies.
+- **20 Hz UDP State Pipeline**: Player transforms, velocities, and altitudes are synchronized at 20 Hz using Godot's high-performance ENet UDP layer. Non-critical state uses unreliable-ordered channels, while match state, room transitions, and countdown events use reliable channels.
+- **Anti-Cheat & Anomaly Detection**:
+  - Authoritative validation of vertical velocity, maximum jump height, and horizontal impulse.
+  - Rate limiting clamped at 35 packets/sec per peer to mitigate packet flooding and socket exhaustion.
+  - Room capacity limits enforced strictly at the server boundary (5th connections automatically rejected with protocol error).
+- **Smooth Remote Interpolation**: Remote player avatars (`remote_player.gd`) utilize cubic interpolation with velocity extrapolation and dead reckoning, eliminating jitter across variable mobile network latency.
 
 ```mermaid
 sequenceDiagram
@@ -69,77 +60,149 @@ sequenceDiagram
     actor Client B (Peer)
     participant Server as Authoritative Dedicated Server
     
-    Note over Client A,Server: Room Creation & Discovery
+    Note over Client A,Server: 1. Room Creation & Collision Check
     Client A->>Server: rpc_id(1, "request_create_room", host_name, cosmetics)
-    Server-->>Server: Generate unique 5-char code & allocate Slot 0
+    Server-->>Server: Generate collision-checked 5-character code
     Server-->>Client A: rpc("room_created", room_code, slot_id=0)
     
-    Note over Client B,Server: Room Join & Verification
+    Note over Client B,Server: 2. Room Join & Slot Allocation
     Client B->>Server: rpc_id(1, "request_join_room", room_code, peer_name, cosmetics)
     Server-->>Server: Validate room exists, code matches, capacity < 4
     Server-->>Client B: rpc("room_joined", room_data, slot_id=1)
     Server-->>Client A: rpc("peer_joined_room", peer_info)
     
-    Note over Client A,Server: Synchronized Match Launch
+    Note over Client A,Server: 3. Deterministic Match Launch
     Client A->>Server: rpc_id(1, "request_start_match")
-    Server-->>Server: Generate Authoritative Course Seed & Start 3.0s Countdown
+    Server-->>Server: Generate Authoritative 64-bit Course Seed & 3.0s Countdown
     Server-->>Client A: rpc("match_countdown_started", seed, 3.0)
     Server-->>Client B: rpc("match_countdown_started", seed, 3.0)
     
     Note over Client A,Client B: Deterministic Procedural Arena Generation
-    Client A-->>Client A: Generate course from Seed
+    Client A-->>Client A: Generate course from Seed (O(1) bandwidth)
     Client B-->>Client B: Generate identical course from Seed
     
-    Note over Client A,Server: 20 Hz Authoritative Gameplay Loop
+    Note over Client A,Server: 4. 20 Hz Authoritative State Loop
     loop Every 50ms (20 Hz Tick)
         Client A->>Server: rpc_unreliable("send_player_state", position, velocity, height)
         Client B->>Server: rpc_unreliable("send_player_state", position, velocity, height)
-        Server-->>Server: Anti-cheat validation (speed, bounds, rate limit)
+        Server-->>Server: Validate speed & position deltas
         Server-->>Client A: rpc_unreliable("broadcast_snapshot", all_players_data)
         Server-->>Client B: rpc_unreliable("broadcast_snapshot", all_players_data)
     end
     
-    Note over Client A,Server: Match Conclusion & Podium Sorting
-    Server-->>Server: Authoritative ranking by maximum height / survival time
+    Note over Client A,Server: 5. Authoritative Ranking & Results
+    Server-->>Server: Deterministic sorting by max altitude / survival time
     Server-->>Client A: rpc("match_concluded", deterministic_rankings)
     Server-->>Client B: rpc("match_concluded", deterministic_rankings)
 ```
 
+### 2. Deterministic Seed-Based Procedural Generation
+- **Zero-Bandwidth Level Sync**: Traditional multiplayer games replicate hundreds of level entities across the network. BOUNZO eliminates this entirely by distributing a single authoritative 64-bit seed upon match launch.
+- **Bitwise Identical Arenas**: The client-side `multiplayer_platform_generator.gd` utilizes this seed to deterministically place normal, moving, spring, and fragile platforms along with hazards (laser gates, closing traps, wind zones). Every peer experiences the exact same obstacle distribution with $O(1)$ network overhead.
+
+### 3. Procedural Reachability Physics (Single-Player & Multiplayer)
+- Based on the player's bounce impulse ($760\text{ px/s}$), horizontal control velocity ($380\text{ px/s}$), and gravity ($1400\text{ px/s}^2$), platform coordinates are calculated such that every generated vertical leap is mathematically proven to be reachable:
+  $$\Delta y_{\text{max}} = \frac{v_{\text{bounce}}^2}{2g} \approx 206.3\text{ px}$$
+- Off-screen platforms ($900\text{ px}$ below viewport) are automatically recycled via object pools to prevent garbage collection spikes.
+
+### 4. Zero-Dependency Procedural Audio Synthesizer
+- In `scripts/audio_manager.gd`, rather than relying on heavy WAV/OGG files for sound effects, BOUNZO features a custom runtime PCM audio synthesizer written in GDScript.
+- Dynamically computes sine, square, and filtered noise buffers at $22,050\text{ Hz}$ with linear pitch ramps (landing pops, coin collection chimes, combo multiplier frequency sweeps).
+
+### 5. Competitive 7-Tier Ranking Ladder
+A complete skill-based progression ladder featuring custom particle shaders, star thresholds, and difficulty scaling:
+
+| Rank Tier | Skill Rating | Hazard Complexity | Stars Required |
+|:---:|:---:|---|:---:|
+| **Bronze** | Beginner | Standard static platforms, basic bounces | 3 Stars |
+| **Silver** | Intermediate | Oscillating platforms, narrow clearances | 4 Stars |
+| **Gold** | Advanced | Moving & fragile collapsing platforms | 5 Stars |
+| **Platinum** | Elite | Wind force vectors & tight timing | 6 Stars |
+| **Diamond** | Master | Ghost wind, timed crusher traps | 6 Stars |
+| **Master** | Grandmaster | Laser gates, combined hazards | 6 Stars |
+| **Grandmaster** | Top 1% | Maximum chaos, adaptive speed scaling | 6 Stars |
+
+<div align="center">
+  <img src="bronze_logo.png" width="80" alt="Bronze" />
+  <img src="silver_logo.png" width="80" alt="Silver" />
+  <img src="gold_logo.png" width="80" alt="Gold" />
+  <img src="platinum_logo.png" width="80" alt="Platinum" />
+  <img src="diamond_logo.png" width="80" alt="Diamond" />
+  <img src="master_logo.png" width="80" alt="Master" />
+  <img src="grandmaster_logo.png" width="80" alt="Grandmaster" />
+</div>
+
 ---
 
-## 🗂️ Project Directory Structure
+## 🧪 Comprehensive Automated Headless Test Suite
+
+The project includes an automated headless integration test suite (`test_multiplayer.gd`) run directly via the Godot console executable. Every subsystem is verified against edge cases:
+
+```powershell
+# Run the complete test suite headlessly via Godot CLI
+godot --headless -s test_multiplayer.gd
+```
+
+### Verified Test Matrix (100% Passing):
+
+| # | Test Case | Category | Status | Verified Behavior |
+|:---:|---|---|:---:|---|
+| **01** | Single-Player Startup | Engine Lifecycle | **PASS** | `game.tscn` compiles & instantiates with zero warnings |
+| **02** | Save Schema Compatibility | Persistence | **PASS** | Schema v5 JSON integrity verified across legacy saves |
+| **03** | Economy & Cosmetics | Game Economy | **PASS** | Ball skins, glow shaders, and trails unlocked atomically |
+| **04** | Rank & Ladder Logic | Progression | **PASS** | Tier transitions and star thresholds accurately validated |
+| **05** | AdMob Reward Injection Guard | Monetization | **PASS** | Unearned rewards rejected; callbacks strictly verified |
+| **06** | 2-Player Room Join Flow | Networking | **PASS** | Room created, code assigned, peer connected to Slot 1 |
+| **07** | 4-Player Capacity Saturation | Concurrency | **PASS** | 4 distinct peers successfully bound to Slots 0–3 |
+| **08** | Room Overflow Boundary Guard | Security | **PASS** | 5th connection rejected with `"Room is full"` protocol error |
+| **09** | Room Code Sanitization | Input Validation | **PASS** | Ambiguous characters (0, O, 1, I) filtered out |
+| **10** | Synchronized Host Countdown | Match Flow | **PASS** | Match launch blocked until all ready; 3.0s sync countdown |
+| **11** | Match Lifecycle Transition | State Machine | **PASS** | Clean transition from COUNTDOWN to IN_GAME to RESULTS |
+| **12** | Authoritative Score Ranking | Anti-Cheat | **PASS** | Deterministic sorting by max altitude without disputes |
+| **13** | Concurrent Client Disconnects | Fault Tolerance | **PASS** | Dynamic slot deallocation and peer cleanup |
+| **14** | Dynamic Host Migration | High Availability| **PASS** | Host privileges cleanly transferred when host disconnects |
+| **15** | Socket Timeout Detection | Network Stability| **PASS** | 6.0s timeout timer verified with automatic reconnection |
+| **16** | Rematch & Reset Flow | State Machine | **PASS** | Room state cleanly reset to lobby for subsequent rounds |
+| **17** | Android Touch Coordinates | Input Mapping | **PASS** | Screen split (< 270px left, > 270px right) mapped to [-1, 1] |
+| **18** | Headless Cold Reboot | Infrastructure | **PASS** | Memory reset with zero orphan peer or room references |
+| **19** | Anti-Spam Packet Throttling | DDoS Protection | **PASS** | High-frequency packet spam throttled at 35 pps threshold |
+| **20** | Single-Player Save Isolation | Data Protection | **PASS** | Multiplayer results strictly isolated from single-player save |
+
+---
+
+## 🗂️ Clean Repository Architecture
 
 ```text
 BOUNZO-MULTIPLAYER/
-├── .gitignore                    # Enterprise gitignore filtering keys, builds, and temp files
+├── .gitignore                    # Enterprise gitignore filtering all keys, builds, and artifacts
 ├── LICENSE                       # Proprietary Source-Available Evaluation License
-├── README.md                     # Technical architecture, highlights, and documentation
-├── project.godot                 # Core Godot 4.7 project manifest and autoload singletons
+├── README.md                     # Engineering documentation and technical highlights
+├── project.godot                 # Engine config, GL Compatibility, 60 FPS cap, autoloads
 ├── export_presets.cfg            # Clean production Android export configuration
-├── server_config.json            # Headless server network and gameplay tuning parameters
-├── Dockerfile                    # Container definition for Linux cloud microVM deployment
-├── fly.toml                      # Fly.io global edge orchestration configuration
+├── server_config.json            # Server networking and gameplay parameters
+├── Dockerfile                    # Container build file for headless Linux dedicated server
+├── fly.toml                      # Fly.io global cloud deployment orchestration
 │
-├── scenes/                       # Structured Godot scene trees (.tscn)
+├── scenes/                       # Declarative Godot scene hierarchy
 │   ├── game/                     # Core single-player game loop and HUD
-│   ├── multiplayer/              # Dedicated server, lobby, arena, and remote player avatars
-│   ├── platform/                 # Procedural bouncing platforms
-│   ├── player/                   # Main player physics controller
-│   └── splash/                   # Cyber animated splash sequence
+│   ├── multiplayer/              # Dedicated server, lobby UI, arena, remote players
+│   ├── platform/                 # Procedural platform entities
+│   ├── player/                   # Character physics body and trail emitters
+│   └── splash/                   # Boot sequence
 │
-├── scripts/                      # Object-oriented GDScript architecture (.gd)
-│   ├── multiplayer/              # Real-time network engine
+├── scripts/                      # Object-oriented GDScript architecture
+│   ├── multiplayer/              # Real-time networking engine
 │   │   ├── dedicated_server.gd   # Headless CLI server daemon
 │   │   ├── match_manager.gd      # Authoritative match orchestration & state sync
 │   │   ├── room_manager.gd       # 4-player room registry and host migration
 │   │   ├── multiplayer_protocol.gd# RPC signatures, packet validation, and limits
-│   │   ├── multiplayer_manager.gd# Client-side network lifecycle and socket management
-│   │   ├── remote_player.gd      # Smooth interpolation and ghost avatar rendering
+│   │   ├── multiplayer_manager.gd# Client-side network lifecycle & socket management
+│   │   ├── remote_player.gd      # Smooth interpolation & ghost avatar rendering
 │   │   └── multiplayer_platform_generator.gd # Seeded deterministic course builder
 │   ├── ad_manager.gd             # AdMob monetization engine with callback safety
-│   ├── audio_manager.gd          # Dynamic sound effects and background audio bus
+│   ├── audio_manager.gd          # Procedural audio waveform synthesizer
 │   ├── camera_controller.gd      # Dynamic vertical tracking camera with smooth damping
-│   ├── challenge_manager.gd      # Tiered rank progression and unlock system
+│   ├── challenge_manager.gd      # 7-tier rank progression and unlock system
 │   ├── game.gd                   # Primary single-player finite state machine
 │   ├── platform_generator.gd     # Single-player dynamic difficulty platform generator
 │   ├── player.gd                 # Rigid-body 2D player controller with responsive touch
@@ -153,61 +216,34 @@ BOUNZO-MULTIPLAYER/
 
 ---
 
-## 🧪 Automated Test Suite Validation
+## 💻 Tech Stack & Tooling
 
-The repository includes a headless verification suite covering network flow, anti-cheat limits, and state integrity without requiring an active display.
-
-```powershell
-# Execute the automated test suite headlessly via Godot CLI
-godot --headless -s test_multiplayer.gd
-```
-
-### Test Suite Execution Matrix:
-
-| # | Test Scenario | Category | Result | Details |
-|---|---------------|----------|:------:|---------|
-| 01 | Single-Player Scene Startup | Engine / Lifecycle | **PASS** | `game.tscn` compiles with zero resource warnings |
-| 02 | Save Schema Backward Compatibility | Storage / I/O | **PASS** | Format v5 data parsed and validated |
-| 03 | Economy & Cosmetics Registry | Game Economy | **PASS** | Unlock flags, ball skins, and trails verified |
-| 04 | Rank & Challenge Progression | Progression | **PASS** | Star thresholds, daily reset, and tier logic checked |
-| 05 | AdMob Reward Injection Prevention | Security | **PASS** | Asserted unearned reward rejection logic |
-| 06 | 2-Player Room Creation & Join Flow | Networking | **PASS** | Code generated, Peer assigned to Slot 1 |
-| 07 | 4-Player Maximum Room Saturation | Concurrency | **PASS** | Successfully registered 4 distinct peers |
-| 08 | Room Capacity Boundary Enforcement | Network Security | **PASS** | 5th connection rejected with protocol error |
-| 09 | Room Code Sanitization & Filtering | Input Validation | **PASS** | Ambiguous characters and malformed lengths rejected |
-| 10 | Synchronized Host Ready & Countdown | Match Sync | **PASS** | Locked countdown with deterministic start timestamp |
-| 11 | Match Completion State Transition | State Machine | **PASS** | Auto-transition to results on match timer expiration |
-| 12 | Authoritative Ranking Verification | Anti-Cheat | **PASS** | Server-side deterministic score sorting verified |
-| 13 | Multi-Client Concurrent Disconnects | Fault Tolerance | **PASS** | Slot recycling and peer registry cleaned |
-| 14 | Dynamic Host Migration Logic | Fault Tolerance | **PASS** | Host transferred to remaining peer on host exit |
-| 15 | Network Socket Timeout Guard | Network Stability| **PASS** | 6.0s timeout triggered and recovered cleanly |
-| 16 | Rematch & Reset Flow | State Machine | **PASS** | State cleanly reset to lobby for repeated rounds |
-| 17 | Android Touch Screen Coordinate Mapping| Input System | **PASS** | Multi-aspect touch ratio mapping validated |
-| 18 | Headless Server Restart / Cold Boot | Infrastructure | **PASS** | Clean room memory and peer tables upon reboot |
-| 19 | Packet Anti-Spam & Payload Throttling | Security | **PASS** | Throttling clamped at 35 pps threshold |
-| 20 | Single-Player Save Data Isolation | Data Protection | **PASS** | Single-player coins and stats unmodified by MP |
-
-**Total Score: 20 / 20 Tests Passed (100% Reliability)**
+- **Game Engine**: Godot Engine 4.7+ (GL Compatibility Renderer)
+- **Language**: GDScript 2.0 (Strongly-typed, Object-Oriented, Signal-driven)
+- **Networking**: Godot High-Level Multiplayer / ENet UDP / Custom RPC Protocol
+- **Server Infrastructure**: Headless Linux container (`ubuntu:22.04`), Docker, Fly.io Edge
+- **Target OS**: Android (API 21+, ARM64 / ARMv7) & Cross-Platform Desktop (Windows / Linux / macOS)
+- **Monetization SDK**: Google Mobile Ads (AdMob)
+- **Testing**: Automated Headless CLI Integration Test Suite
 
 ---
 
-## 🚀 Quick Start & Local Development
+## 🚀 Local Setup & Quick Start
 
 ### Prerequisites
 - **Godot Engine 4.7+** (Standard 64-bit edition)
 - **Git**
-- Optional: **Docker** (for containerized server testing)
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/mohammedayman/bounzo-multiplayer.git
-cd bounzo-multiplayer
+git clone https://github.com/MohammedAyman07/BOUNZO.git
+cd BOUNZO
 ```
 
-### 2. Launching the Local Dedicated Server
-You can launch an authoritative server locally via the command line or using the included batch runner:
+### 2. Running the Local Authoritative Server
+Launch the dedicated server headlessly on port 7777:
 ```powershell
-# Using the Windows batch script
+# Using the Windows batch runner
 .\START_LOCAL_SERVER.bat
 
 # Or directly via Godot CLI
@@ -215,7 +251,7 @@ godot --headless -- --server --port=7777
 ```
 
 ### 3. Launching Game Clients
-Run two or more instances to test multiplayer locally:
+Run two instances to test multiplayer locally:
 ```powershell
 # Launch Client 1
 godot
@@ -235,48 +271,29 @@ godot --headless -s test_multiplayer.gd
 
 ---
 
-## 🌐 Cloud & Containerized Deployment
+## 🔒 Security, Hygiene & Zero-Secrets Guarantee
 
-A production-ready `Dockerfile` is included to run the headless dedicated server on any Linux container host (Fly.io, AWS ECS, Google Cloud Run, DigitalOcean, or Kubernetes):
-
-```dockerfile
-FROM ubuntu:22.04
-# Exposes authoritative UDP port 7777
-EXPOSE 7777/udp
-ENTRYPOINT ["./godot", "--headless", "--", "--server", "--port=7777"]
-```
-
-To deploy with zero server setup using Fly.io edge infrastructure:
-```bash
-# Deploys container to global edge network with UDP port mapping
-fly launch
-fly deploy
-```
+This repository enforces strict production repository hygiene:
+- **No Keystores or Private Keys**: Android release signing keystores (`*.keystore`, `*.jks`) and credential manifests (`export_credentials.cfg`) are strictly excluded via `.gitignore`.
+- **No Bulky Build Artifacts**: Heavy generated binaries (`*.apk`, `*.aab`, Gradle caches, `.godot` cache artifacts) have been cleanly excluded.
+- **Pure Source Integrity**: Only pure source files, scenes, documentation, scripts, and production assets are tracked.
 
 ---
 
-## 🔒 Security, Compliance & Clean Repository Guarantee
-
-This repository follows strict production git hygiene:
-- **Zero Secrets / Keys Committed**: Private Android keystores (`*.keystore`, `*.jks`), export credentials (`export_credentials.cfg`), signing passwords, and environment secrets are excluded and protected via comprehensive `.gitignore` rules.
-- **No Bulky Build Binaries**: Heavy generated binaries (`*.apk`, `*.aab`, Gradle caches, `.godot` cache artifacts) have been cleanly excluded to ensure rapid clone times and respect repository size best practices.
-- **Pure Source Code**: Only clean source files, scenes, documentation, scripts, and production assets are tracked.
-
----
-
-## 📄 License & Intellectual Property Notice
+## 📄 License & Evaluation Rights
 
 This software is distributed under a **Proprietary Source-Available Evaluation License**.  
 Copyright © 2026 Mohammed Ayman (Ayzus). All rights reserved.
 
-> **Evaluation Permission:** Technical recruiters, engineering hiring committees (e.g., Google, Meta, and peer technology companies), and code reviewers are granted full permission to view, clone, and execute this codebase locally for the purpose of candidate skills assessment and technical evaluation.  
-> Commercial use, reproduction, modification, and unauthorized public distribution are strictly prohibited. Refer to [`LICENSE`](LICENSE) for complete terms.
+> **Evaluation Permission:** Technical recruiters, engineering hiring managers (including Google, Meta, and peer technology companies), and code reviewers are granted full permission to view, clone, and execute this codebase locally for the purpose of candidate evaluation and technical assessment.  
+> Commercial exploitation, reproduction, distribution, or public hosting without prior written permission is strictly prohibited. Refer to [`LICENSE`](LICENSE) for complete terms.
 
 ---
 
-## 👨‍💻 Author & Contact
+## 👤 Author & Contact
 
 **Mohammed Ayman**  
 - **Email**: [mohammedayman0107@gmail.com](mailto:mohammedayman0107@gmail.com)  
-- **Role**: Software Engineer / Game Systems & Network Programmer  
-- **Focus**: Real-Time Distributed Systems, Game Engines (Godot/C#/C++), High-Throughput Networking, Mobile Architecture
+- **GitHub**: [@MohammedAyman07](https://github.com/MohammedAyman07)  
+- **Google Play**: [BOUNZO on Google Play Store](https://play.google.com/store/apps/details?id=com.ayzus.bounzo)  
+- **Role Focus**: Software Engineer / Game Systems & Network Programmer (Distributed Systems, Real-Time Physics, Engine Architecture)
