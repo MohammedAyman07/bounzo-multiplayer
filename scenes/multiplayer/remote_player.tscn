@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/remote_player.gd" id="1_remote"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tag"]
+font_size = 12
+font_color = Color(0.9, 0.9, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.9)
+
+[node name="RemotePlayer" type="Node2D"]
+z_index = 4
+script = ExtResource("1_remote")
+
+[node name="NametagPanel" type="PanelContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -42.0
+offset_right = 50.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="NametagPanel"]
+layout_mode = 2
+text = "Player"
+label_settings = SubResource("LabelSettings_tag")
+horizontal_alignment = 1
+vertical_alignment = 1

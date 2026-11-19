@@ -1,0 +1,12 @@
+app = "bounzo-server"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[[services]]
+  protocol = "udp"
+  internal_schema = "udp"
+
+  [[services.ports]]
+    port = 7777

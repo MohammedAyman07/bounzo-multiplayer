@@ -1,0 +1,63 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="BOUNZO"
+run/main_scene="res://scenes/splash/splash.tscn"
+config/quit_on_go_back=false
+config/features=PackedStringArray("4.7", "GL Compatibility")
+run/max_fps=60
+config/icon="res://assets/icon/icon_1024x1024.png"
+
+[autoload]
+
+WorldPhaseManager="*res://scripts/world_phase_manager.gd"
+SaveManager="*res://scripts/save_manager.gd"
+CurrencyManager="*res://scripts/currency_manager.gd"
+CosmeticData="*res://scripts/cosmetic_data.gd"
+GameState="*res://scripts/game_state.gd"
+SettingsManager="*res://scripts/settings_manager.gd"
+AudioManager="*res://scripts/audio_manager.gd"
+DifficultyManager="*res://scripts/difficulty_manager.gd"
+GameEvents="*res://scripts/game_events.gd"
+DailyChallengeManager="*res://scripts/daily_challenge_manager.gd"
+MissionManager="*res://scripts/mission_manager.gd"
+ChallengeManager="*res://scripts/challenge_manager.gd"
+UITheme="*res://scripts/ui_theme.gd"
+MobileAds="*res://addons/AdmobPlugin/Admob.gd"
+AdManager="*res://scripts/ad_manager.gd"
+MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
+
+[display]
+
+window/size/viewport_width=540
+window/size/viewport_height=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg")
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[physics]
+
+2d/physics_engine="GodotPhysics2D"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

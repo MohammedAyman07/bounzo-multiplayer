@@ -1,0 +1,45 @@
+PROPRIETARY SOURCE-AVAILABLE EVALUATION LICENSE
+
+Copyright (c) 2026 Mohammed Ayman (Ayzus). All rights reserved.
+
+==============================================================================
+TERMS AND CONDITIONS FOR VIEWING AND TECHNICAL EVALUATION
+==============================================================================
+
+1. GRANT OF EVALUATION LICENSE
+Subject to the terms of this License, the Copyright Holder grants any person 
+or entity ("Evaluator", including recruiters, hiring managers, engineering 
+evaluators, and technical reviewers) a non-exclusive, non-transferable, 
+royalty-free license to:
+    a. View, clone, read, and inspect the source code and associated assets 
+       solely for the purpose of technical evaluation, code review, 
+       portfolio assessment, and hiring consideration.
+    b. Compile, run, and execute the project locally in a development 
+       environment solely to inspect and verify game functionality, 
+       multiplayer performance, and architecture.
+
+2. RESTRICTIONS
+Except as expressly permitted in Section 1, you may NOT:
+    a. Copy, reproduce, republish, distribute, sublicense, sell, rent, or 
+       lease any portion of the source code, game assets, art, audio, or 
+       compiled binaries.
+    b. Modify, adapt, translate, reverse engineer, decompile, or create 
+       derivative works based on this software, in whole or in part.
+    c. Use this software, or any portion thereof, for any commercial purpose, 
+       monetization, production deployment, public hosting, or inclusion 
+       in any proprietary or open-source product.
+    d. Remove, alter, or obscure any copyright notices, trademarks, or author 
+       attributions from any copy of the source code or assets.
+
+3. INTELLECTUAL PROPERTY OWNERSHIP
+All title, ownership rights, trademarks ("BOUNZO"), and intellectual property 
+rights in and to the software, source code, game mechanics, network protocols, 
+graphics, audio, and documentation remain exclusively with Mohammed Ayman (Ayzus).
+
+4. DISCLAIMER OF WARRANTY
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. IN NO EVENT 
+SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, 
+WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, 
+OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

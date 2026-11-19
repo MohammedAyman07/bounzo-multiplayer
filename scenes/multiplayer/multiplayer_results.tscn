@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_results.gd" id="1_results"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 40
+font_color = Color(1, 0.824, 0.122, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.85)
+shadow_size = 8
+shadow_color = Color(0.482, 0.173, 1, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_host_status"]
+font_size = 14
+font_color = Color(0.561, 0.541, 0.608, 1)
+
+[node name="MultiplayerResults" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_results")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.012, 0.059, 0.95)
+
+[node name="SafeContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 40
+
+[node name="VBox" type="VBoxContainer" parent="SafeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="SafeContainer/VBox"]
+layout_mode = 2
+text = "MATCH RESULTS"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="PodiumContainer" type="VBoxContainer" parent="SafeContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="HostStatusLabel" type="Label" parent="SafeContainer/VBox"]
+layout_mode = 2
+text = "Waiting for host to rematch..."
+label_settings = SubResource("LabelSettings_host_status")
+horizontal_alignment = 1
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="SafeContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="RematchBtn" type="Button" parent="SafeContainer/VBox/ButtonsHBox"]
+custom_minimum_size = Vector2(140, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "REMATCH"
+
+[node name="LobbyBtn" type="Button" parent="SafeContainer/VBox/ButtonsHBox"]
+custom_minimum_size = Vector2(140, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LOBBY"
+
+[node name="MenuBtn" type="Button" parent="SafeContainer/VBox/ButtonsHBox"]
+custom_minimum_size = Vector2(140, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EXIT"

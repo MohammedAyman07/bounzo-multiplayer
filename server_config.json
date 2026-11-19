@@ -1,0 +1,24 @@
+{
+  "server": {
+    "bind_address": "0.0.0.0",
+    "port": 7777,
+    "max_clients": 100,
+    "max_rooms": 50,
+    "tick_rate": 20,
+    "packet_rate_limit": 35
+  },
+  "client_defaults": {
+    "default_server_host": "cairo-constantly.tun.ply.gg",
+    "fallback_server_ip": "147.185.221.213",
+    "default_server_port": 42174,
+    "connection_timeout_seconds": 12.0,
+    "remote_config_url": ""
+  },
+  "gameplay": {
+    "max_players_per_room": 4,
+    "min_players_to_start": 2,
+    "countdown_seconds": 3.0,
+    "match_duration_seconds": 90.0,
+    "room_code_length": 5
+  }
+}

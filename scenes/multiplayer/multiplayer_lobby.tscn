@@ -1,0 +1,295 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_lobby_ui.gd" id="1_lobby"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 28
+font_color = Color(0.098, 0.851, 1, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.85)
+shadow_size = 6
+shadow_color = Color(0.482, 0.173, 1, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_status"]
+font_size = 13
+font_color = Color(1, 0.824, 0.122, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sub"]
+font_size = 12
+font_color = Color(0.65, 0.65, 0.72, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ip"]
+font_size = 13
+font_color = Color(0.224, 1, 0.533, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_code"]
+font_size = 26
+font_color = Color(1, 0.824, 0.122, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_host_addr"]
+font_size = 13
+font_color = Color(0.098, 0.851, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lan"]
+font_size = 12
+font_color = Color(0.224, 1, 0.533, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[node name="MultiplayerLobby" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lobby")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.012, 0.059, 1)
+
+[node name="SafeMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="SafeMargin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="SafeMargin/VBox"]
+layout_mode = 2
+text = "ONLINE MULTIPLAYER"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="DeviceIpLabel" type="Label" parent="SafeMargin/VBox"]
+visible = false
+layout_mode = 2
+text = "MY DEVICE IP: 192.168.1.10"
+label_settings = SubResource("LabelSettings_ip")
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="SafeMargin/VBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_status")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LanCard" type="PanelContainer" parent="SafeMargin/VBox"]
+visible = false
+layout_mode = 2
+
+[node name="LanHBox" type="HBoxContainer" parent="SafeMargin/VBox/LanCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LanInfoLabel" type="Label" parent="SafeMargin/VBox/LanCard/LanHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🟢 LAN ROOM: [BZ482] (1/4)"
+label_settings = SubResource("LabelSettings_lan")
+vertical_alignment = 1
+
+[node name="LanJoinBtn" type="Button" parent="SafeMargin/VBox/LanCard/LanHBox"]
+custom_minimum_size = Vector2(100, 38)
+layout_mode = 2
+text = "JOIN NOW"
+
+[node name="EntryPanel" type="VBoxContainer" parent="SafeMargin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="NameLabel" type="Label" parent="SafeMargin/VBox/EntryPanel"]
+layout_mode = 2
+text = "YOUR DISPLAY NAME"
+label_settings = SubResource("LabelSettings_sub")
+
+[node name="NameInput" type="LineEdit" parent="SafeMargin/VBox/EntryPanel"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+placeholder_text = "Enter Player Name"
+max_length = 14
+
+[node name="CreateRoomBtn" type="Button" parent="SafeMargin/VBox/EntryPanel"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+text = "CREATE ROOM"
+
+[node name="JoinRoomBtn" type="Button" parent="SafeMargin/VBox/EntryPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "JOIN ROOM WITH CODE"
+
+[node name="JoinBox" type="VBoxContainer" parent="SafeMargin/VBox/EntryPanel"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CodeInput" type="LineEdit" parent="SafeMargin/VBox/EntryPanel/JoinBox"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+placeholder_text = "ENTER 5-LETTER ROOM CODE (e.g. BZ482)"
+alignment = 1
+max_length = 5
+
+[node name="JoinSubmitBtn" type="Button" parent="SafeMargin/VBox/EntryPanel/JoinBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "ENTER ROOM"
+
+[node name="HostPhoneBtn" type="Button" parent="SafeMargin/VBox/EntryPanel"]
+visible = false
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+text = "HOST OFFLINE ON PHONE (HOTSPOT)"
+
+[node name="ServerBox" type="VBoxContainer" parent="SafeMargin/VBox/EntryPanel"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ServerHeaderHBox" type="HBoxContainer" parent="SafeMargin/VBox/EntryPanel/ServerBox"]
+layout_mode = 2
+
+[node name="ServerLabel" type="Label" parent="SafeMargin/VBox/EntryPanel/ServerBox/ServerHeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SERVER ADDRESS"
+label_settings = SubResource("LabelSettings_sub")
+
+[node name="SetHotspotIpBtn" type="Button" parent="SafeMargin/VBox/EntryPanel/ServerBox/ServerHeaderHBox"]
+custom_minimum_size = Vector2(85, 26)
+layout_mode = 2
+text = "HOTSPOT"
+
+[node name="SetPcIpBtn" type="Button" parent="SafeMargin/VBox/EntryPanel/ServerBox/ServerHeaderHBox"]
+custom_minimum_size = Vector2(75, 26)
+layout_mode = 2
+text = "PC IP"
+
+[node name="ServerInput" type="LineEdit" parent="SafeMargin/VBox/EntryPanel/ServerBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+placeholder_text = "IP:PORT (e.g. 192.168.1.10:7777)"
+
+[node name="Spacer" type="Control" parent="SafeMargin/VBox/EntryPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AdvancedBtn" type="Button" parent="SafeMargin/VBox/EntryPanel"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "⚙️ ADVANCED / LOCAL NETWORK"
+
+[node name="BackBtn" type="Button" parent="SafeMargin/VBox/EntryPanel"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "BACK TO MAIN MENU"
+
+[node name="RoomPanel" type="VBoxContainer" parent="SafeMargin/VBox"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="SafeMargin/VBox/RoomPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RoomCodeLabel" type="Label" parent="SafeMargin/VBox/RoomPanel/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CODE: -----"
+label_settings = SubResource("LabelSettings_code")
+
+[node name="CopyCodeBtn" type="Button" parent="SafeMargin/VBox/RoomPanel/Header"]
+custom_minimum_size = Vector2(90, 40)
+layout_mode = 2
+text = "COPY CODE"
+
+[node name="HostAddrHBox" type="HBoxContainer" parent="SafeMargin/VBox/RoomPanel"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HostAddrLabel" type="Label" parent="SafeMargin/VBox/RoomPanel/HostAddrHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "HOST: 192.168.1.10:7777"
+label_settings = SubResource("LabelSettings_host_addr")
+
+[node name="CopyHostAddrBtn" type="Button" parent="SafeMargin/VBox/RoomPanel/HostAddrHBox"]
+custom_minimum_size = Vector2(90, 32)
+layout_mode = 2
+text = "COPY IP"
+
+[node name="BroadcastStatusLabel" type="Label" parent="SafeMargin/VBox/RoomPanel"]
+visible = false
+layout_mode = 2
+text = "Wi-Fi Discovery: BROADCASTING ACTIVE"
+label_settings = SubResource("LabelSettings_lan")
+
+[node name="TargetScoreContainer" type="HBoxContainer" parent="SafeMargin/VBox/RoomPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TargetScoreLabel" type="Label" parent="SafeMargin/VBox/RoomPanel/TargetScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MATCH GOAL: 2000 PTS (RACE)"
+label_settings = SubResource("LabelSettings_ip")
+
+[node name="ChangeScoreBtn" type="Button" parent="SafeMargin/VBox/RoomPanel/TargetScoreContainer"]
+custom_minimum_size = Vector2(130, 36)
+layout_mode = 2
+text = "CHANGE GOAL"
+
+[node name="SlotsContainer" type="VBoxContainer" parent="SafeMargin/VBox/RoomPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Actions" type="VBoxContainer" parent="SafeMargin/VBox/RoomPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StartMatchBtn" type="Button" parent="SafeMargin/VBox/RoomPanel/Actions"]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+text = "START MATCH"
+
+[node name="ReadyBtn" type="Button" parent="SafeMargin/VBox/RoomPanel/Actions"]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "READY!"
+
+[node name="LeaveRoomBtn" type="Button" parent="SafeMargin/VBox/RoomPanel/Actions"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "LEAVE ROOM"

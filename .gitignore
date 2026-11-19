@@ -1,0 +1,77 @@
+# ==============================================================================
+# BOUNZO MULTIPLAYER — GITIGNORE
+# Prevents large binaries, secrets, keystores, and build caches from being tracked
+# ==============================================================================
+
+# Godot 4+ engine build and cache
+.godot/
+*.translation
+*.pck
+
+# Sensitive credentials, signing keys & private configs
+*.keystore
+*.jks
+*.key
+*.pem
+*.p12
+*.cer
+*.crt
+*.pfx
+secrets/
+.env*
+export_credentials.cfg
+.godot/export_credentials.cfg
+
+# Android build cache, intermediates & binaries
+android/
+*.apk
+*.aab
+*.idsig
+*.ap_
+bin/
+build/
+*.class
+
+# Third-party command line tools & installers
+cmdline-tools/
+cmdline-tools.zip
+cmdline.zip
+playit.exe
+playit_setup.msi
+
+# Large archives and video duplicates
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+VIDEOSPLASH.mp4
+
+# Temporary logs and debug dumps
+*.log
+export_log.txt
+godot_out.txt
+out.txt
+*.tmp
+*.bak
+*.swp
+*.recovered
+*~
+
+# Operating system files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# IDE & Editor caches
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosv
+*.sln.docstates

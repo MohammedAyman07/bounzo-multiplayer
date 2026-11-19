@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://cgame00001"]
+
+[ext_resource type="Script" uid="uid://b0g3i3j0vw7rx" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://bbwr8g7jaxgvs" path="res://scripts/camera_controller.gd" id="2_camera"]
+[ext_resource type="Script" uid="uid://dl423pp3yeccx" path="res://scripts/platform_generator.gd" id="3_generator"]
+[ext_resource type="Script" uid="uid://ciij2bumrav16" path="res://scripts/background.gd" id="4_background"]
+[ext_resource type="PackedScene" uid="uid://cplayer0001" path="res://scenes/player/player.tscn" id="5_player"]
+[ext_resource type="Script" uid="uid://165582gdtjxb" path="res://scripts/ui_builder.gd" id="ui_builder"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sub"]
+font_size = 30
+font_color = Color(0.75, 0.75, 0.75, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_score"]
+font_size = 56
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.7)
+shadow_size = 6
+shadow_color = Color(0, 0.5, 1, 0.6)
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gameover"]
+font_size = 54
+font_color = Color(1, 0.25, 0.85, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.85)
+shadow_size = 8
+shadow_color = Color(0.7, 0, 1, 0.6)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_value"]
+font_size = 48
+font_color = Color(0.9, 0.9, 1, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 0.7)
+
+[sub_resource type="LabelSettings" id="LabelSettings_paused"]
+font_size = 54
+font_color = Color(0.4, 0.85, 1, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.85)
+shadow_size = 8
+shadow_color = Color(0, 0.5, 1, 0.5)
+shadow_offset = Vector2(0, 4)
+
+[node name="Game" type="Node2D" unique_id=266242806]
+script = ExtResource("1_game")
+
+[node name="Background" type="Node2D" parent="." unique_id=1708901504]
+z_index = -10
+script = ExtResource("4_background")
+
+[node name="PlatformGenerator" type="Node2D" parent="." unique_id=1448117952]
+script = ExtResource("3_generator")
+
+[node name="Player" parent="." unique_id=525018789 instance=ExtResource("5_player")]
+z_index = 5
+position = Vector2(270, -200)
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1958532589]
+position = Vector2(270, -200)
+script = ExtResource("2_camera")
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1301591484]
+process_mode = 3
+layer = 10
+script = ExtResource("ui_builder")
+
+[node name="HUD" type="Control" parent="UILayer" unique_id=2004886971]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScoreContainer" type="VBoxContainer" parent="UILayer/HUD" unique_id=1124199963]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 30.0
+offset_right = 90.0
+offset_bottom = 110.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="ScoreTitle" type="Label" parent="UILayer/HUD/ScoreContainer" unique_id=1623717344]
+layout_mode = 2
+text = "SCORE"
+label_settings = SubResource("LabelSettings_sub")
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="UILayer/HUD/ScoreContainer" unique_id=1977812296]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_score")
+horizontal_alignment = 1
+
+[node name="PauseBtn" type="Button" parent="UILayer/HUD" unique_id=1271228322]
+process_mode = 3
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -68.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 68.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="GameOverPanel" type="ColorRect" parent="UILayer" unique_id=620758580]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0, 0.08, 0.92)
+
+[node name="VBox" type="VBoxContainer" parent="UILayer/GameOverPanel" unique_id=762872407]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -220.0
+offset_right = 180.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GameOverTitle" type="Label" parent="UILayer/GameOverPanel/VBox" unique_id=515730573]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_gameover")
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="UILayer/GameOverPanel/VBox" unique_id=1822822808]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="ScoreSubLabel" type="Label" parent="UILayer/GameOverPanel/VBox" unique_id=1005382185]
+layout_mode = 2
+text = "SCORE"
+label_settings = SubResource("LabelSettings_sub")
+horizontal_alignment = 1
+
+[node name="ScoreValue" type="Label" parent="UILayer/GameOverPanel/VBox" unique_id=341331336]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_value")
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="UILayer/GameOverPanel/VBox" unique_id=2017592557]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="TryAgainBtn" type="Button" parent="UILayer/GameOverPanel/VBox" unique_id=1666489839]
+process_mode = 3
+custom_minimum_size = Vector2(280, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TRY AGAIN"
+
+[node name="PausePanel" type="ColorRect" parent="UILayer" unique_id=1098146731]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0, 0.08, 0.88)
+
+[node name="VBox" type="VBoxContainer" parent="UILayer/PausePanel" unique_id=1144433101]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -200.0
+offset_right = 160.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PausedTitle" type="Label" parent="UILayer/PausePanel/VBox" unique_id=884378145]
+layout_mode = 2
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_paused")
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="UILayer/PausePanel/VBox" unique_id=1760490195]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ResumeBtn" type="Button" parent="UILayer/PausePanel/VBox" unique_id=1898343612]
+process_mode = 3
+custom_minimum_size = Vector2(280, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RESUME"
+
+[node name="Spacer2" type="Control" parent="UILayer/PausePanel/VBox" unique_id=1114359932]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="RestartBtn" type="Button" parent="UILayer/PausePanel/VBox" unique_id=1902731502]
+process_mode = 3
+custom_minimum_size = Vector2(280, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RESTART"
