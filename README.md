@@ -2,35 +2,36 @@
 
 # ⚡ BOUNZO: Real-Time Multiplayer & Mobile Arcade Engine
 
-### Production Android Game & Authoritative UDP Multiplayer Architecture
-**Engineered with Godot Engine 4 (GDScript 2.0) • Published on Google Play • Built for 60 FPS Mobile Performance**
+### Authoritative UDP Multiplayer Architecture & Cross-Platform Game Engine
+**Engineered with Godot Engine 4 (GDScript 2.0) • Headless Dedicated Cloud Server • 60 FPS Mobile Architecture**
 
-[![Google Play Store](https://img.shields.io/badge/Google_Play-Live_on_Play_Store-414141?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=com.ayzus.bounzo)
+[![Multiplayer Status](https://img.shields.io/badge/Multiplayer-Internal%20Beta%20%2F%20Pre--Release-blueviolet.svg?style=for-the-badge)](#)
+[![Single-Player Base](https://img.shields.io/badge/Single--Player%20Base-Published%20on%20Google%20Play-414141?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=com.ayzus.bounzo)
 [![Engine](https://img.shields.io/badge/Engine-Godot%204.7%2B-blue.svg?style=for-the-badge&logo=godotengine&logoColor=white)](https://godotengine.org/)
 [![Networking](https://img.shields.io/badge/Networking-Authoritative%20UDP%20%2F%20RPC-orange.svg?style=for-the-badge)](https://en.wikipedia.org/wiki/User_Datagram_Protocol)
 [![Deployment](https://img.shields.io/badge/Cloud-Docker%20%7C%20Fly.io%20Edge-24185b.svg?style=for-the-badge&logo=docker&logoColor=white)](https://fly.io)
 [![Test Suite](https://img.shields.io/badge/Automated%20Tests-20%2F20%20Passed%20(100%25)-brightgreen.svg?style=for-the-badge)](test_multiplayer.gd)
 [![License](https://img.shields.io/badge/License-Proprietary%20Evaluation%20Only-red.svg?style=for-the-badge)](LICENSE)
 
-<br/>
-
-<a href="https://play.google.com/store/apps/details?id=com.ayzus.bounzo">
-  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="75">
-</a>
-
 <p align="center">
-  <b>Package Name:</b> <code>com.ayzus.bounzo</code> &nbsp;|&nbsp; 
-  <b>Version:</b> <code>2.1.0</code> &nbsp;|&nbsp; 
-  <b>Target Platforms:</b> Android (ARM64 / ARMv7) & Cross-Platform PC
+  <b>Project:</b> <code>BOUNZO Multiplayer Engine</code> &nbsp;|&nbsp; 
+  <b>Architecture:</b> Authoritative UDP Dedicated Server (20 Hz) &nbsp;|&nbsp; 
+  <b>Target Platforms:</b> Android & Cross-Platform PC
 </p>
 
 </div>
 
 ---
 
+> [!NOTE]
+> **Release Status Notice**:  
+> The single-player core game is published on Google Play (`com.ayzus.bounzo`). **This repository contains the advanced real-time Authoritative Multiplayer Architecture & Dedicated Server**, currently in pre-release staging / portfolio review, featuring custom UDP networking, deterministic seed synchronization, containerized cloud deployment, and automated headless integration testing.
+
+---
+
 ## 🎯 Executive Summary for Technical Recruiters & Engineering Leads
 
-**BOUNZO** is an end-to-end, production-ready arcade survival platformer with a distributed authoritative multiplayer architecture. Originally developed and published to Google Play as a high-performance single-player arcade title, it has been scaled into a **real-time 4-player competitive survival racer** powered by a dedicated UDP server, deterministic seed synchronization, and zero-allocation gameplay loops.
+**BOUNZO** is an end-to-end arcade survival platformer with a distributed authoritative multiplayer architecture. While the foundational single-player version is published on Google Play, this project scales the game into a **real-time 4-player competitive survival racer** powered by a dedicated UDP server, deterministic seed synchronization, and zero-allocation gameplay loops.
 
 ### Key Engineering Domains Demonstrated:
 1. **Real-Time Distributed Systems**: Authoritative dedicated server model, client-side dead reckoning, UDP RPC synchronization at 20 Hz, and strict packet rate limiting (35 pps).
@@ -295,5 +296,5 @@ Copyright © 2026 Mohammed Ayman (Ayzus). All rights reserved.
 **Mohammed Ayman**  
 - **Email**: [mohammedayman0107@gmail.com](mailto:mohammedayman0107@gmail.com)  
 - **GitHub**: [@MohammedAyman07](https://github.com/MohammedAyman07)  
-- **Google Play**: [BOUNZO on Google Play Store](https://play.google.com/store/apps/details?id=com.ayzus.bounzo)  
+- **Google Play (Single-Player Base)**: [BOUNZO on Google Play Store](https://play.google.com/store/apps/details?id=com.ayzus.bounzo)  
 - **Role Focus**: Software Engineer / Game Systems & Network Programmer (Distributed Systems, Real-Time Physics, Engine Architecture)
